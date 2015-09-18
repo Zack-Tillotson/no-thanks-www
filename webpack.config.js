@@ -9,8 +9,8 @@ module.exports = {
     devServer: 'webpack/hot/dev-server'
   },
   output: {
-    filename: '[name]_bundle.js', // Will output App_wp_bundle.js
-    path: path.join(__dirname, 'assets'),
+    filename: '[name]_bundle.js', // Will output app_bundle.js
+    path: path.join(__dirname, 'app/assets'),
     publicPath: 'http://localhost:8080/assets' // Required for webpack-dev-server
   },
   resolve: {

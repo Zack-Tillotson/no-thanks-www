@@ -1,3 +1,4 @@
 import React from 'react';
+import Core from 'Core';
 
-React.render(<h1>Hi!</h1>, document.getElementById('game-container'));
+React.render(<Core.Widget />, document.body);
