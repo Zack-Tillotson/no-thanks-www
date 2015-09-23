@@ -10,13 +10,13 @@ module.exports = {
   },
   output: {
     filename: '[name]_bundle.js', // Will output app_bundle.js
-    path: path.join(__dirname, 'app/assets'),
+    path: path.join(__dirname, 'assets'),
     publicPath: 'http://localhost:8080/assets' // Required for webpack-dev-server
   },
   resolve: {
     root: [
       __dirname, 
-      path.join(__dirname, 'app/assets/components')
+      path.join(__dirname, 'assets')
     ],
     alias: {
     }

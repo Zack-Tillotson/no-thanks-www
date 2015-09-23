@@ -2,16 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Selector from './selector.js';
-import {Dispatcher} from './actions.js';
+import {Dispatcher} from '../../state/actions.js';
 
-import Cards from 'Cards';
-import Players from 'Players';
+import {Component as Table} from '../Table';
+import Players from '../Players';
 
 export default connect(Selector, Dispatcher)(React.createClass({
   componentWillMount() {
-    this.props.addPlayer();
-    this.props.addPlayer();
-    this.props.addPlayer();
+    this.props.dispatchedActions.addPlayer();
+    this.props.dispatchedActions.addPlayer();
+    this.props.dispatchedActions.addPlayer();
   },
   render() {
     return (
@@ -24,8 +24,7 @@ export default connect(Selector, Dispatcher)(React.createClass({
         <hr />
 
         <div className="body">
-          <Cards.Component cards={this.props.cards} />
-          <Players.Component players={this.props.players} />
+          <Table {...this.props.table} />
         </div>
 
         <hr />

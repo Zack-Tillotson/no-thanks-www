@@ -4,12 +4,11 @@ import { Provider } from 'react-redux';
 import ThunkMiddleware from 'redux-thunk';
 import LoggerMiddleware from 'redux-logger';
 
-import GameContainer from 'GameContainer';
+import reducer from '../reducer';
 
-const reducer = GameContainer.Reducer;
+import Game from '../../components/Game';
 
 const store = applyMiddleware(
-    GameContainer.Middleware,
     ThunkMiddleware,
     LoggerMiddleware({
       level: 'info'
@@ -20,7 +19,7 @@ export default React.createClass({
   render() { 
     return (
       <Provider store={store}>
-        {() => <GameContainer.Widget />}
+        {() => <Game.Widget />}
       </Provider>
     )
   }
