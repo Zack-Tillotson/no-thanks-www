@@ -5,13 +5,12 @@ import Selector from './selector.js';
 import {Dispatcher} from '../../state/actions.js';
 
 import {Component as Table} from '../Table';
-import Players from '../Players';
+import {Component as Players} from '../Players';
+import {Component as Controls} from '../Controls';
 
-export default connect(Selector, Dispatcher)(React.createClass({
+export default connect(Selector, Dispatcher.ui)(React.createClass({
   componentWillMount() {
-    this.props.dispatchedActions.addPlayer();
-    this.props.dispatchedActions.addPlayer();
-    this.props.dispatchedActions.addPlayer();
+    
   },
   render() {
     return (
@@ -25,6 +24,8 @@ export default connect(Selector, Dispatcher)(React.createClass({
 
         <div className="body">
           <Table {...this.props.table} />
+          <Players players={this.props.players} />
+          <Controls {...this.props.dispatchedActions}/>
         </div>
 
         <hr />

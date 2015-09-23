@@ -3,9 +3,9 @@ import {Names} from '../actions.js';
 
 const currentSize = (state = 0, action) => {
   switch(action.type) {
-    case Names.newGame:
+    case Names.engine.newGame:
       return action.deck.size;
-    case Names.cardAccepted:
+    case Names.engine.cardAccepted:
       return state - 1;
   }
   return state;
@@ -13,17 +13,17 @@ const currentSize = (state = 0, action) => {
 
 const originalSize = (state = 0, action) => {
   switch(action.type) {
-    case Names.newGame:
+    case Names.engine.newGame:
       return action.deck.size;
   }
   return state;
 }
 
-const cards = (state = [{value: -1}], action) => {
+const cards = (state = [], action) => {
  switch(action.type) {
-    case Names.newGame:
+    case Names.engine.newGame:
       return action.deck.cards;
-    case Names.cardAccepted:
+    case Names.engine.cardAccepted:
       const cards = state.slice(0);
       cards.push(action.newCard);
       return cards;
@@ -33,10 +33,10 @@ const cards = (state = [{value: -1}], action) => {
 
 const pot = (state = 0, action) => {
  switch(action.type) {
-    case Names.newGame:
-    case Names.cardAccepted:
+    case Names.engine.newGame:
+    case Names.engine.cardAccepted:
       return 0;
-    case Names.cardRejected:
+    case Names.engine.cardRejected:
       return state + 1;
   }
   return state; 
