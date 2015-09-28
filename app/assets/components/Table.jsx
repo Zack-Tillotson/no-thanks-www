@@ -1,15 +1,14 @@
 import React from 'react';
 
-import {Component as Deck} from '../Deck';
-import {Component as Pot} from '../Pot';
+import Deck from './Deck';
+import Pot from './Pot';
 
 export default React.createClass({
   render() {
     return (
       <div>
-        <Deck {...this.props.deck} />
-        <br />
         <Pot value={this.props.pot} />
+        <Deck {...this.props.deck} />        
       </div>
     )
   }

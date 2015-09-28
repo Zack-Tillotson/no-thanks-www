@@ -1,8 +1,4 @@
-export default {
-  addPlayer(state) {
-    return {
-      money: 11,
-      cards: []
-    }
-  }
-}
+import Deck from './deck.js';
+import Player from './player.js';
+
+export default {...Deck, ...Player}

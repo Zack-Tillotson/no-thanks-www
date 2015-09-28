@@ -1,4 +1,4 @@
 import React from 'react';
-import Core from './state/CoreComponent';
+import Provider from './state/Provider';
 
-React.render(<Core.Widget />, document.body);
+React.render(<Provider />, document.body);

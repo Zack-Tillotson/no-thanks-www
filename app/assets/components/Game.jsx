@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Selector from './selector.js';
-import {Dispatcher} from '../../state/actions.js';
+import Selector from './Game/selector.js';
+import {Dispatcher} from '../state/actions.js';
 
-import {Component as Table} from '../Table';
-import {Component as Players} from '../Players';
-import {Component as Controls} from '../Controls';
+import Table from './Table';
+import Players from './Players';
+import Controls from './Controls';
 
 export default connect(Selector, Dispatcher.ui)(React.createClass({
   componentWillMount() {
@@ -23,9 +23,9 @@ export default connect(Selector, Dispatcher.ui)(React.createClass({
         <hr />
 
         <div className="body">
+          <Controls {...this.props.dispatchedActions} gameState={this.props.game.state}/>
           <Table {...this.props.table} />
-          <Players players={this.props.players} />
-          <Controls {...this.props.dispatchedActions}/>
+          <Players {...this.props.players} />
         </div>
 
         <hr />

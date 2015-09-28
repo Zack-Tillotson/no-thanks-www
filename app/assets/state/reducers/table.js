@@ -19,14 +19,12 @@ const originalSize = (state = 0, action) => {
   return state;
 }
 
-const cards = (state = [], action) => {
+const topCard = (state = '', action) => {
  switch(action.type) {
     case Names.engine.newGame:
-      return action.deck.cards;
+      return action.deck.topCard;
     case Names.engine.cardAccepted:
-      const cards = state.slice(0);
-      cards.push(action.newCard);
-      return cards;
+      return action.newCard || '';
   }
   return state; 
 }
@@ -46,7 +44,7 @@ export default combineReducers({
   deck: combineReducers({
     currentSize,
     originalSize,
-    cards
+    topCard
   }),
   pot
 });

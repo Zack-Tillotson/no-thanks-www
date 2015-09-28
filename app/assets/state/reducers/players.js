@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 import {Names} from '../actions.js';
 
-function findPlayer(players, who) {
-  const index = players.find((player) => player.id === who.id);
+function getPlayerIndex(players, who) {
+  const index = players.findIndex((player) => player.__id__ === who.__id__);
   if(index >= 0)
     return index;
   else
@@ -12,30 +12,37 @@ function findPlayer(players, who) {
 const playerReducer = (state = {}, action) => {
   switch(action.type) {
     case Names.engine.cardAccepted:
-      state.cards.push(card);
+      state.cards.push(action.card);
       state.money += action.pot;
-    case Names.cardRejected:
+      break;
+    case Names.engine.cardRejected:
       state.money--;
+      break;
   }
+  return state;
 }
 
-const playersReducer = (state = [], action) => {
+const listReducer = (state = [], action) => {
   switch(action.type) {
     case Names.engine.newGame:
       return action.players;
     case Names.engine.changePlayers:
-      if(action.addOrRemove === 'add') {
-        state.push(action.who);
-      } else {
-        const playerIndex = getPlayerIndex(state, action.who);
-        state = state.slice(0, playerIndex).concat(state.slice(playerIndex, state.length)); 
+      const newState = state.slice(0);
+      switch(action.addOrRemove) {
+        case 'add':
+          newState.push(action.who);
+          break;
+        case 'remove':
+          const playerIndex = getPlayerIndex(state, action.who);
+          newState.splice(playerIndex, 1);
+          break;
       }
-      return state;
+      return newState;
     case Names.engine.cardAccepted: 
-    case Names.cardRejected:
+    case Names.engine.cardRejected:
       const playerIndex = getPlayerIndex(state, action.who);
-      if(playerIndex) {
-        state[playerIndex] = playerReducer(player);
+      if(playerIndex > -1) {
+        state[playerIndex] = playerReducer(state[playerIndex], action);
       }
       return state;      
     default:
@@ -43,4 +50,26 @@ const playersReducer = (state = [], action) => {
   }
 }
 
-export default playersReducer;
+const currentPlayerReducer = (state = 0, action, newPlayerCount) => {
+  switch(action.type) {
+    case Names.engine.newGame:
+      return action.currentPlayer;
+    case Names.engine.changePlayers:
+      return state % newPlayerCount;
+    case Names.engine.cardRejected:
+      return (state + 1) % newPlayerCount;
+    default:
+      return state;
+  }
+}
+
+// DIY combineReducers
+// Form {
+//  list: [], 
+//  currentPlayer: integer
+// }
+export default (state = {}, action) => {
+  const list = listReducer(state.list, action);
+  const currentPlayer = currentPlayerReducer(state.currentPlayer, action, list.length);
+  return {list, currentPlayer}
+}

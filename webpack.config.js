@@ -18,8 +18,7 @@ module.exports = {
       __dirname, 
       path.join(__dirname, 'assets')
     ],
-    alias: {
-    }
+    extensions: ['', '.js', '.jsx']
   },
   inline: true,
   watch: true,

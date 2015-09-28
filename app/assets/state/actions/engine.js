@@ -9,11 +9,11 @@ const Names = {
 }
 
 const Actions = {
-  newGame: (players, deck) => {
-    return {type: Names.newGame, players, deck};
+  newGame: (players, currentPlayer, deck) => {
+    return {type: Names.newGame, players, currentPlayer, deck};
   },
-  startGame: (player, card) => {
-    return {type: Names.startGame, player, card};
+  startGame: (startingPlayerIndex) => {
+    return {type: Names.startGame, startingPlayerIndex};
   },
   gameOver: (scores) => {
     return {type: Names.gameOver, scores};
@@ -24,8 +24,8 @@ const Actions = {
   cardAccepted: (who, card, pot, newCard) => {
     return {type: Names.cardAccepted, who, card, pot, newCard};
   },
-  cardRejected: (who, newCurrentPlayer, playerPot, pot) => {
-    return {type: Names.playerDecision, who, newCurrentPlayer, playerPot, pot};
+  cardRejected: (who) => {
+    return {type: Names.cardRejected, who};
   },
 
 }

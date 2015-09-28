@@ -4,7 +4,7 @@
   "description": "Enjoy the fun that is No Thanks! the tabletop game right in your browser!",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --port 8888 --content-base app/ --inline"
+    "start": "webpack-dev-server --port 8888 --content-base app/ --inline --display-reasons --display-error-details"
   },
   "author": "Zack Tillotson",
   "dependencies": {
@@ -17,6 +17,7 @@
     "redux-logger": "^1.0.8",
     "redux-thunk": "^1.0.0",
     "reselect": "^1.1.0",
+    "uuid": "^2.0.1",
     "webpack": "^1.12.2"
   },
   "devDependencies": {
