@@ -14,10 +14,11 @@ function stateReducer(state = STATES.pregame, action) {
         return STATES.gameover;
     case Names.engine.newGame:
       return STATES.ongoing;
+    case Names.engine.resetGame:
+      return STATES.pregame;
     default:
       return state;
   }
-
 }
 
 export default combineReducers({

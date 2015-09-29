@@ -19,11 +19,11 @@ export default React.createClass({
     if(!cards.length) {
       return 'empty';
     } else {
-      return cards.map((value, index) => {
-        const shownValue = this.props.showBottomCardValues || index === 0 ? value : '';
+      return cards.map((card, index) => {
+        const shownValue = this.props.showBottomCardValues || index === 0 ? card.value : '';
         const isFullCard = index === 0;
         return (
-          <Card key={index} value={shownValue} isFullCard={isFullCard} />
+          <Card key={index} value={shownValue} runs={card.runs} isFullCard={isFullCard} />
         );
       });
     }

@@ -1,15 +1,19 @@
-import ui from './actions/ui.js';
-import engine from './actions/engine.js';
+import ui from './actions/ui';
+import engine from './actions/engine';
+import ai from './actions/ai';
 
 export default {
   Names: {
     ui: ui.Names,
-    engine: engine.Names
+    engine: engine.Names,
+    ai: ai.Names
   }, 
   Dispatcher: {
     ui: ui.Dispatcher
   },
   Actions: {
-    engine: engine.Actions
+    ui: ui.Actions,
+    engine: engine.Actions,
+    ai: ai.Actions
   }
 };

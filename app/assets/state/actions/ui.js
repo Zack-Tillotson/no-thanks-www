@@ -4,17 +4,18 @@ const Names = {
   newGame: namespace + 'Request New Game',
   startGame: namespace + 'Request Start Game',
   playerDecision: namespace + 'Request Player Decision',
+  resetGame: namespace + 'Request Reset'
 }
 
 const Actions = {
-  changePlayers: (addOrRemove) => {
-    return {type: Names.changePlayers, addOrRemove};
+  changePlayers: (addOrRemove, who) => {
+    return {type: Names.changePlayers, addOrRemove, who};
   },
   newGame: () => {
     return {type: Names.newGame};
   },
-  startGame: () => {
-    return {type: Names.startGame};
+  resetGame: () => {
+    return {type: Names.resetGame};
   },
   playerDecision: (decision) => {
     return {type: Names.playerDecision, decision};
@@ -25,13 +26,13 @@ const Dispatcher = (dispatch) => {
   return {
     dispatchedActions: {
       requestAddPlayer: () => dispatch(Actions.changePlayers('add')),
-      requestRemovePlayer: () => dispatch(Actions.changePlayers('remove')),
+      requestRemovePlayer: (player) => dispatch(Actions.changePlayers('remove', player)),
       requestNewGame: () => dispatch(Actions.newGame()),
-      requestStartGame: () => dispatch(Actions.startGame()),
+      requestPlayAgain: () => dispatch(Actions.resetGame()),
       requestTake: () => dispatch(Actions.playerDecision('take')),
       requestNoThanks: () => dispatch(Actions.playerDecision('noThanks'))
     }
   };
 }
 
-export default {Dispatcher, Names};
+export default {Dispatcher, Names, Actions};
