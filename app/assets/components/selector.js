@@ -34,10 +34,10 @@ function getNetPoints(stacks) {
   return stacks.reduce((sum, stack) => sum + stack[0].value, 0);
 }
 
-function player(currentCard, state) {
+function player(currentCard, isCurrentPlayer, state) {
   const stacks = addRunAlert(getCardStacks(state.cards), currentCard);
   const netPoints = getNetPoints(stacks);
-  return {...state, stacks, netPoints};
+  return {...state, stacks, netPoints, isCurrentPlayer};
 }
 
 const game = (state) => state.game;
@@ -46,13 +46,16 @@ const table = (state) => state.table;
 
 const currentCard = createSelector([table], (table) => table.deck.topCard);
 
-const playersRollup = createSelector([players, currentCard], (players, currentCard) => {
-  const {currentPlayer, list} = players;
-  return {
-    currentPlayer,
-    list: list.map((person) => player(currentCard, person))
-  };
-});
+const playersRollup = createSelector(
+  [players, currentCard], 
+  (players, currentCard) => {
+    const {currentPlayer, list} = players;
+    return {
+      currentPlayer,
+      list: list.map((person, index) => player(currentCard, index === currentPlayer, person))
+    };
+  }
+);
 
 function getWinningPlayer(players) {
   const index = players.reduce((winnerIndex, player, index, players) => {

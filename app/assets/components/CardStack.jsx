@@ -1,7 +1,8 @@
 import React from 'react';
+import Radium from 'radium';
 import Card from './Card';
 
-export default React.createClass({
+export default Radium(React.createClass({
   propTypes: {
     showBottomCardValues: React.PropTypes.bool,
     values: React.PropTypes.array.isRequired,
@@ -29,6 +30,13 @@ export default React.createClass({
     }
   },
   render() {
-    return <div className="card-stack">{this.getCards()}</div>;
+    return <div style={styles.container}>{this.getCards()}</div>;
   }
-})
+}));
+
+const styles = {
+  container: {
+    display: "inline-block",
+    marginRight: "7px"
+  }
+}

@@ -3,7 +3,7 @@ No Thanks!
 
 Zack Tillotson
 
-No Thanks! game written for a browser. Currently written using Webpack, Babel, React, Redux stack.
+No Thanks! game written for a browser. Currently written using Webpack, Babel, React, Redux, Radium stack.
 
 ```
 npm install

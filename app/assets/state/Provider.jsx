@@ -15,7 +15,8 @@ const store = applyMiddleware(
   ...middleware,
   ThunkMiddleware,
   LoggerMiddleware({
-    level: 'info'
+    level: 'info',
+    predicate: (state, action) => !(/ui\//.test(action.type)) &&  !(/ai\//.test(action.type))
   })
 )(createStore)(reducer);
 
@@ -24,7 +25,7 @@ export default React.createClass({
     store.dispatch(Actions.ai.requestAction());
   },
   componentDidMount() {
-    this.aiTimer = setInterval(this.aiAction, 1000);
+    //this.aiTimer = setInterval(this.aiAction, 3500);
   },
   render() { 
     return (
