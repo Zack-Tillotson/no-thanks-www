@@ -11,9 +11,13 @@ const PageControls = React.createClass({
   isValidNumberOfPlayers() {
     return this.props.players.list.length > 0;
   },
-  addPlayerClickHandler(event) {
+  addHumanPlayerClickHandler(event) {
     event.preventDefault();
-    this.props.dispatchedActions.requestAddPlayer();
+    this.props.dispatchedActions.requestAddPlayer('human');
+  },
+  addAiPlayerClickHandler(event) {
+    event.preventDefault();
+    this.props.dispatchedActions.requestAddPlayer('ai');
   },
   newGameClickHandler(event) {
     event.preventDefault();
@@ -31,11 +35,18 @@ const PageControls = React.createClass({
       <div style={styles.container}>
         <div>
           {this.props.game.state === 'pregame' && (
-            <p key="add-player" 
-              style={[buttonStyles, styles.addPlayer]} 
-              onClick={this.addPlayerClickHandler}>
-              Add Player
-            </p>
+            <div>
+              <p key="add-human" 
+                style={[buttonStyles, styles.addPlayer]} 
+                onClick={this.addHumanPlayerClickHandler}>
+                Add Human Player
+              </p>
+              <p key="add-ai" 
+                style={[buttonStyles, styles.addPlayer]} 
+                onClick={this.addAiPlayerClickHandler}>
+                Add AI Player
+              </p>
+            </div>
           )}
           {this.props.game.state === 'pregame' && (
             <p key="start-game" 

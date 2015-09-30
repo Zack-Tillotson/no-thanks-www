@@ -25,10 +25,9 @@ export default React.createClass({
     store.dispatch(Actions.ai.requestAction());
   },
   componentDidMount() {
-    //this.aiTimer = setInterval(this.aiAction, 500);
-    store.dispatch(Actions.ui.changePlayers('add'));
-    store.dispatch(Actions.ui.changePlayers('add'));
-    // setTimeout(() => store.dispatch(Actions.ui.newGame()), 10);
+    store.dispatch(Actions.ui.addPlayer());
+    store.dispatch(Actions.ui.addPlayer());
+    this.aiTimer = setInterval(this.aiAction, 500);
   },
   render() { 
     return (

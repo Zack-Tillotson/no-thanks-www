@@ -10,14 +10,19 @@ export default Radium(React.createClass({
   render() {
     return (
       <div style={[styles.container, {backgroundColor: this.props.color}]}>
-        <span style={styles.name}>{this.props.name}</span>
+        <span style={styles.name}>
+          {this.props.playerType === 'ai' && (
+            "Computer "
+          )}
+          {this.props.name}
+        </span>
         {(this.props.state === 'ongoing' || this.props.state === 'gameover') && (
           <span style={styles.money}>${this.props.money}</span>
         )}
         {(this.props.state === 'ongoing' || this.props.state === 'gameover') && (
           <span style={styles.cardPoints}>{this.props.cardPoints} Points</span>
         )}
-        {(this.props.state === 'ongoing' || this.props.state === 'gameover') && this.props.stacks.length && (
+        {(this.props.state === 'ongoing' || this.props.state === 'gameover') && this.props.stacks.length > 0 && (
           <div style={styles.cards}>
             {this.props.stacks.map((stack) => {
               return this.getCardStack(stack);
@@ -49,10 +54,12 @@ const styles = {
   },
   name: {
     display: 'inline-block',
-    width: '150px'
+    width: '33%'
   },
   money: {
-    display: 'inline-block'
+    display: 'inline-block',
+    width: '33%',
+    textAlign: 'right'
   },
   cards: {
     display: 'block',
@@ -68,7 +75,9 @@ const styles = {
     marginTop: '15px'
   },
   cardPoints: {
-    marginLeft: '10px'
+    display: 'inline-block',
+    width: '33%',
+    textAlign: 'right'
   }
 
 }
