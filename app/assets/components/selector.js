@@ -36,8 +36,9 @@ function getNetPoints(stacks) {
 
 function player(currentCard, isCurrentPlayer, state) {
   const stacks = addRunAlert(getCardStacks(state.cards), currentCard);
-  const netPoints = getNetPoints(stacks);
-  return {...state, stacks, netPoints, isCurrentPlayer};
+  const cardPoints = getNetPoints(stacks);
+  const netPoints = cardPoints - state.money;
+  return {...state, stacks, cardPoints, netPoints, isCurrentPlayer};
 }
 
 const game = (state) => state.game;

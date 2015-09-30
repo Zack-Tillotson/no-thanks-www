@@ -21,13 +21,23 @@ export default Radium(React.createClass({
         {(this.props.state === 'ongoing' || this.props.state === 'gameover') && (
           <span style={styles.money}>${this.props.money}</span>
         )}
-        <PlayerControls player={this.props} />
+        {(this.props.state === 'ongoing' || this.props.state === 'gameover') && (
+          <span style={styles.cardPoints}>{this.props.cardPoints} Points</span>
+        )}
         {(this.props.state === 'ongoing' || this.props.state === 'gameover') && (
           <div style={styles.cards}>
             {this.props.stacks.map((stack) => {
               return this.getCardStack(stack);
             })}
           </div>
+        )}
+        {this.props.state === 'gameover' && (
+          <span style={styles.total}>
+            Final Score: {this.props.netPoints}
+          </span>
+        )}
+        {(this.props.state === 'pregame' || this.props.state === 'ongoing') && (
+          <PlayerControls player={this.props} />
         )}
       </div>
     )
@@ -37,7 +47,7 @@ export default Radium(React.createClass({
 const styles = {
   container: {
     borderTop: 'solid 2px black',
-    height: '100px'
+    clear: 'both'
   },
   whoTurn: {
     float: 'left',
@@ -52,7 +62,18 @@ const styles = {
     display: 'inline-block'
   },
   cards: {
-    display: 'block'
+    display: 'block',
+    marginTop: '10px'
+  },
+  total: {
+    display: 'block',
+    clear: 'both',
+    textAlign: 'left',
+    marginTop: '15px',
+    marginBottom: '10px'
+  },
+  cardPoints: {
+    marginLeft: '10px'
   }
 
 }

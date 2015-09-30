@@ -1,14 +1,32 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Radium from 'radium';
+import hotkey from 'react-hotkey';
 
 import Selector from './selector.js';
 import {Dispatcher} from '../state/actions.js';
 
 import Game from './Game';
+
 const Page = Radium(React.createClass({
   componentWillMount() {
-    
+    hotkey.activate();
+  },
+  mixins: [hotkey.Mixin('handleHotkey')], // Eww
+  handleHotkey(e) {
+    if(this.props.game.state != 'ongoing') return;
+    event.preventDefault();
+    event.stopPropagation();
+    switch(event.keyCode) {
+      case 189: // Minus
+      case 32: // Space
+        this.props.dispatchedActions.requestNoThanks();
+        break;
+      case 13: // Enter
+      case 187: // Plus
+        this.props.dispatchedActions.requestTake();
+        break;
+    }
   },
   render() {
     return (

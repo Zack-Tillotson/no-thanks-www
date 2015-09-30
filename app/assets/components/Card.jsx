@@ -51,7 +51,9 @@ const styles = {
     color: "#333"
   },
   fullText: {
-    color: '#000'
+    color: '#000',
+    display: 'inline-block',
+    width: '1.15em'
   },
   partial: {
     color: '#888'

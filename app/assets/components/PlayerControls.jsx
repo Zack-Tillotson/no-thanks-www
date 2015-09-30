@@ -44,7 +44,8 @@ const styles = {
     padding: "5px 25px",
     border: "solid 1px #333",
     borderRadius: "5px",
-    margin: 0
+    margin: 0,
+    display: 'inline-block'
   },
   removePlayer: {
     background: "red",
@@ -53,6 +54,7 @@ const styles = {
   take: {
   },
   noThanks: {
+    marginLeft: '10px'
   }
 }
 

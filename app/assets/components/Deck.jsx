@@ -22,6 +22,7 @@ export default Radium(React.createClass({
 
 const styles = {
   container: {
-    display: 'inline-block'
+    float: 'right',
+    marginRight: '10px'
   }
 }
