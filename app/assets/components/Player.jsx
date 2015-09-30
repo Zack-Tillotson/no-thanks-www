@@ -9,14 +9,7 @@ export default Radium(React.createClass({
   },
   render() {
     return (
-      <div style={[styles.container]}>
-        {this.props.state === 'ongoing' && (
-          <div style={styles.whoTurn}>
-            {this.props.isCurrentPlayer && (
-              ">"
-            )}
-          </div>
-        )}
+      <div style={[styles.container, {backgroundColor: this.props.color}]}>
         <span style={styles.name}>{this.props.name}</span>
         {(this.props.state === 'ongoing' || this.props.state === 'gameover') && (
           <span style={styles.money}>${this.props.money}</span>
@@ -24,7 +17,7 @@ export default Radium(React.createClass({
         {(this.props.state === 'ongoing' || this.props.state === 'gameover') && (
           <span style={styles.cardPoints}>{this.props.cardPoints} Points</span>
         )}
-        {(this.props.state === 'ongoing' || this.props.state === 'gameover') && (
+        {(this.props.state === 'ongoing' || this.props.state === 'gameover') && this.props.stacks.length && (
           <div style={styles.cards}>
             {this.props.stacks.map((stack) => {
               return this.getCardStack(stack);
@@ -47,11 +40,11 @@ export default Radium(React.createClass({
 const styles = {
   container: {
     borderTop: 'solid 2px black',
-    clear: 'both'
+    clear: 'both',
+    padding: '5px',
   },
   whoTurn: {
     float: 'left',
-    height: '75px',
     width: '15px'
   },
   name: {
@@ -63,14 +56,16 @@ const styles = {
   },
   cards: {
     display: 'block',
-    marginTop: '10px'
+    margin: "10px",
+    padding: '10px',
+    background: 'rgba(255,255,255,.5)',
+    boxShadow: '0 0 5px 5px rgba(255,255,255,.3)'
   },
   total: {
     display: 'block',
     clear: 'both',
     textAlign: 'left',
-    marginTop: '15px',
-    marginBottom: '10px'
+    marginTop: '15px'
   },
   cardPoints: {
     marginLeft: '10px'
