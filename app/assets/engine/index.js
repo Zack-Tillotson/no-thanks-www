@@ -1,4 +1,5 @@
-import Deck from './deck.js';
-import Player from './player.js';
+import Deck from './deck';
+import Player from './player';
+import Ai from './ai';
 
-export default {...Deck, ...Player}
+export default {...Deck, ...Player, ...Ai}

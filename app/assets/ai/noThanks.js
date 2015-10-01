@@ -1,17 +1,18 @@
 // I always say No Thanks! whenever I can.
 
 export default {
-  predict(state) {
+  predict(options, state) {
 
     // 0 value when out of money
     const noThanksValue = state.players.list[state.players.currentPlayer].money;
-
-    return [{
-      action: 'take',
-      value: 0.5
-    }, {
-      action: 'noThanks',
-      value: noThanksValue
-    }].sort((a,b) => b.value - a.value);
+    
+    return options.map((action) => {
+      switch(action) {
+        case 'take':
+          return {action, value: 0.5};
+        case 'noThanks':
+          return {action, value: noThanksValue};
+      }
+    });
   }
 }
