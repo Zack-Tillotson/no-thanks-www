@@ -23,13 +23,14 @@ function getLastPlayer(state) {
 }
 
 export default {
-  addPlayer(state, playerType) {
+  addPlayer(state, playerType, aiType) {
     return {
       __id__: uuid.v4(),
       name: NAMES[playerIndex % NAMES.length],
       color: COLORS[playerIndex++ % COLORS.length],
       money: STARTING_PLAYER_MONEY,
       playerType,
+      aiType,
       cards: []
     }
   },

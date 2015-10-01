@@ -11,8 +11,8 @@ const Actions = {
   changePlayers: (addOrRemove, who) => {
     return {type: Names.changePlayers, addOrRemove, who};
   },
-  addPlayer: (playerType = 'ai') => {
-    return {type: Names.changePlayers, addOrRemove: 'add', playerType};
+  addPlayer: (playerType = 'ai', aiType = '"Random"') => {
+    return {type: Names.changePlayers, addOrRemove: 'add', playerType, aiType};
   },
   newGame: () => {
     return {type: Names.newGame};
@@ -28,7 +28,7 @@ const Actions = {
 const Dispatcher = (dispatch) => { 
   return {
     dispatchedActions: {
-      requestAddPlayer: (playerType) => dispatch(Actions.addPlayer(playerType)),
+      requestAddPlayer: (playerType, aiType = 'human') => dispatch(Actions.addPlayer(playerType, aiType)),
       requestRemovePlayer: (player) => dispatch(Actions.changePlayers('remove', player)),
       requestNewGame: () => dispatch(Actions.newGame()),
       requestPlayAgain: () => dispatch(Actions.resetGame()),

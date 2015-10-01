@@ -15,9 +15,8 @@ const PageControls = React.createClass({
     event.preventDefault();
     this.props.dispatchedActions.requestAddPlayer('human');
   },
-  addAiPlayerClickHandler(event) {
-    event.preventDefault();
-    this.props.dispatchedActions.requestAddPlayer('ai');
+  addAiPlayerClickHandler(aiType) {
+    this.props.dispatchedActions.requestAddPlayer('ai', aiType);
   },
   newGameClickHandler(event) {
     event.preventDefault();
@@ -36,16 +35,30 @@ const PageControls = React.createClass({
         <div>
           {this.props.game.state === 'pregame' && (
             <div>
-              <p key="add-human" 
-                style={[buttonStyles, styles.addPlayer]} 
-                onClick={this.addHumanPlayerClickHandler}>
-                Add Human Player
-              </p>
-              <p key="add-ai" 
-                style={[buttonStyles, styles.addPlayer]} 
-                onClick={this.addAiPlayerClickHandler}>
-                Add AI Player
-              </p>
+              <div>
+                <p key="add-human" 
+                  style={[buttonStyles, styles.addPlayer]} 
+                  onClick={this.addHumanPlayerClickHandler}>
+                  Add Human Player
+                </p>
+              </div>
+              <div>
+                <p key="add-ai-random" 
+                  style={[buttonStyles, styles.addPlayer]} 
+                  onClick={this.addAiPlayerClickHandler.bind(this, '"Random"')}>
+                  Add 'Random' AI Player
+                </p>
+                <p key="add-ai-nothanks" 
+                  style={[buttonStyles, styles.addPlayer]} 
+                  onClick={this.addAiPlayerClickHandler.bind(this, '"No Thanks!"')}>
+                  Add 'No Thanks!' AI Player
+                </p>
+                <p key="add-ai-nvt" 
+                  style={[buttonStyles, styles.addPlayer]} 
+                  onClick={this.addAiPlayerClickHandler.bind(this, '"Net Value Threshold"')}>
+                  Add 'Net Value Threshold' AI Player
+                </p>
+              </div>
             </div>
           )}
           {this.props.game.state === 'pregame' && (

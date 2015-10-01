@@ -12,7 +12,7 @@ export default Radium(React.createClass({
       <div style={[styles.container, {backgroundColor: this.props.color}]}>
         <span style={styles.name}>
           {this.props.playerType === 'ai' && (
-            "Computer "
+            this.props.aiType + " "
           )}
           {this.props.name}
         </span>

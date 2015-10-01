@@ -11,7 +11,7 @@ export default (store) => (next) => (action) => {
 
   // Add Player
   if(action.type === Names.ui.changePlayers && action.addOrRemove === 'add') {
-    const who = Engine.addPlayer(state, action.playerType);
+    const who = Engine.addPlayer(state, action.playerType, action.aiType);
     delayedDispatch(store.dispatch, Actions.engine.changePlayers('add', who));
 
   // Remove player
@@ -52,7 +52,7 @@ export default (store) => (next) => (action) => {
     const players = state.players;
     const player = players.list[players.currentPlayer];
     if(player.playerType === 'ai') {
-      delayedDispatch(store.dispatch, Actions.ai.requestDecision());
+      delayedDispatch(store.dispatch, Actions.ai.requestDecision(player.aiType));
     }
   }
 

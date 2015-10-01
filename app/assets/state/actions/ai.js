@@ -9,8 +9,8 @@ const Actions = {
   requestAction: () => {
     return {type: Names.requestAction};
   },
-  requestDecision: () => {
-    return {type: Names.requestDecision};
+  requestDecision: (aiType) => {
+    return {type: Names.requestDecision, aiType};
   },
   takeAction: (action) => {
     return {type: Names.takeAction, action};
