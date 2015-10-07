@@ -25,8 +25,9 @@ export default React.createClass({
     store.dispatch(Actions.ai.requestAction());
   },
   componentDidMount() {
-    store.dispatch(Actions.ui.addPlayer('ai', '"No Thanks!"'));
-    store.dispatch(Actions.ui.addPlayer('ai', '"No Thanks!"'));
+    for(let i = 0 ; i < Math.random() * 3 + 1; i++) {
+      store.dispatch(Actions.ui.addPlayer('ai'));
+    }
     this.aiTimer = setInterval(this.aiAction, 500);
   },
   render() { 

@@ -1,13 +1,19 @@
-// I always choose between taking and saying no thanks at random!
+// I choose at random with a bias towards No Thanks!
+
+const noThanksOdds = .65;
+
 function randomValue() {
-  return Math.random() + 1 - .5;
+  return Math.random();
 }
 export default {
   predict(options, state) {
     return options.map((action) => {
-      return {
-        action, value: randomValue()
-      };
+      switch(action) {
+        case 'take':
+          return {action, value: randomValue()};
+        case 'noThanks':
+          return {action, value: noThanksOdds};
+      }
     });
   }
 }

@@ -7,11 +7,16 @@ const Names = {
   resetGame: namespace + 'Request Reset'
 }
 
+const aiTypes = ["Random", "No Thanks!", "Net Value Threshold"];
+function getRandomAiType() {
+  return aiTypes[parseInt(Math.random() * aiTypes.length)];
+}
+
 const Actions = {
   changePlayers: (addOrRemove, who) => {
     return {type: Names.changePlayers, addOrRemove, who};
   },
-  addPlayer: (playerType = 'ai', aiType = '"Random"') => {
+  addPlayer: (playerType = 'ai', aiType = getRandomAiType()) => {
     return {type: Names.changePlayers, addOrRemove: 'add', playerType, aiType};
   },
   newGame: () => {
