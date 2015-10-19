@@ -25,10 +25,15 @@ export default React.createClass({
     store.dispatch(Actions.ai.requestAction());
   },
   componentDidMount() {
-    for(let i = 0 ; i < Math.random() * 3 + 1; i++) {
-      store.dispatch(Actions.ui.addPlayer('ai'));
+    this.aiTimer = setInterval(this.aiAction, 2500);
+    store.dispatch(Actions.ui.addPlayer('ai', '"Reinforcement"'));
+    for(let i = 0 ; i < 3 ; i++) {
+      if(Math.random() > .5) {
+        store.dispatch(Actions.ui.addPlayer('ai', '"Random"'));
+      } else {
+        store.dispatch(Actions.ui.addPlayer('ai', '"Net Value Threshold"'));
+      }
     }
-    this.aiTimer = setInterval(this.aiAction, 500);
   },
   render() { 
     return (

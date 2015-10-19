@@ -59,7 +59,7 @@ const Page = Radium(React.createClass({
         <hr />
 
         <footer style={styles.footer}>
-          Thanks for your help testing! Let me know what you think :]
+          v0.2 - Thanks for your help testing! Let me know what you think :]
         </footer>
 
       </div>

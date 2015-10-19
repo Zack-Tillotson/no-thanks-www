@@ -7,6 +7,8 @@ import {Dispatcher} from '../state/actions';
 
 import buttonStyles from './buttonStyles';
 
+const aiNames = ['"Random"', '"No Thanks!"', '"Net Value Threshold"', '"Reinforcement"'];
+
 const PageControls = React.createClass({
   isValidNumberOfPlayers() {
     return this.props.players.list.length > 0;
@@ -15,7 +17,8 @@ const PageControls = React.createClass({
     event.preventDefault();
     this.props.dispatchedActions.requestAddPlayer('human');
   },
-  addAiPlayerClickHandler(aiType) {
+  addAiPlayerClickHandler() {
+    const aiType = this.refs.aiType.getDOMNode().value;
     this.props.dispatchedActions.requestAddPlayer('ai', aiType);
   },
   newGameClickHandler(event) {
@@ -43,21 +46,17 @@ const PageControls = React.createClass({
                 </p>
               </div>
               <div>
-                <p key="add-ai-random" 
+                AI Strategies: 
+                <select ref="aiType" style={[styles.aiSelect]}>
+                  {aiNames.map((aiName) => (
+                    <option value={aiName}>{aiName}</option>
+                  ))}
+                </select>
+                <p key="add-ai" 
                   style={[buttonStyles, styles.addPlayer]} 
-                  onClick={this.addAiPlayerClickHandler.bind(this, '"Random"')}>
-                  Add 'Random' AI Player
-                </p>
-                <p key="add-ai-nothanks" 
-                  style={[buttonStyles, styles.addPlayer]} 
-                  onClick={this.addAiPlayerClickHandler.bind(this, '"No Thanks!"')}>
-                  Add 'No Thanks!' AI Player
-                </p>
-                <p key="add-ai-nvt" 
-                  style={[buttonStyles, styles.addPlayer]} 
-                  onClick={this.addAiPlayerClickHandler.bind(this, '"Net Value Threshold"')}>
-                  Add 'Net Value Threshold' AI Player
-                </p>
+                  onClick={this.addAiPlayerClickHandler}>
+                  Add AI Player
+                </p>  
               </div>
             </div>
           )}
@@ -109,6 +108,13 @@ const styles = {
       cursor: 'not-allowed',
       border: 'none'
     }
+  },
+  aiSelect: {
+    border: 'none',
+    background: '#CCC',
+    borderRadius: '0',
+    fontSize: '17px',
+    margin: '0 10px'
   }
 }
 

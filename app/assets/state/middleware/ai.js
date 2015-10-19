@@ -1,6 +1,6 @@
 import {Names, Actions} from '../actions';
 import engine from '../../engine';
-import {random, noThanks, netValueThreshold} from '../../ai';
+import {random, noThanks, netValueThreshold, reinforcement} from '../../ai';
 
 function delayedDispatch(dispatch, action) {
   setTimeout(() => dispatch(action), 1);
@@ -15,8 +15,11 @@ export default (store) => (next) => (action) => {
     const options = engine.getCurrentOptions(state);
     const predictions = (action.aiType === '"No Thanks!"') ? noThanks.predict(options, state)
       : (action.aiType === '"Net Value Threshold"') ? netValueThreshold.predict(options, state)
+      : (action.aiType === '"Reinforcement"') ? reinforcement.predict(options, state)
       : random.predict(options, state);
     const decision = predictions.sort((a,b) => b.value - a.value)[0].action;
+
+    console.log("decision!", decision, predictions);
 
     delayedDispatch(store.dispatch, Actions.ui.playerDecision(decision));
   }

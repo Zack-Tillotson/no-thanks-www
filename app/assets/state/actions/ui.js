@@ -7,7 +7,7 @@ const Names = {
   resetGame: namespace + 'Request Reset'
 }
 
-const aiTypes = ["Random", "No Thanks!", "Net Value Threshold"];
+const aiTypes = ["Random", "No Thanks!", "Net Value Threshold", "Reinforcement"];
 function getRandomAiType() {
   return aiTypes[parseInt(Math.random() * aiTypes.length)];
 }
